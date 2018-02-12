@@ -1,0 +1,4 @@
+#
+# SSH
+#
+alias sshhosts="grep -w -i "Host" ~/.ssh/config | sed 's/Host//'"

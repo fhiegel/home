@@ -1,0 +1,73 @@
+[core]
+	trustctime = false
+	editor = vim
+#	editor = "/home/fhiegel/Téléchargements/GitExtensions/GitExtensions.exe" fileeditor
+	filemode = false
+	autolf = true
+	excludesfile = ~/.gitsettings/excludes
+	hooksPath = ~/.gitsettings/hooks
+	autocrlf = input
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[credential]
+	helper = cache --timeout=432000
+[diff]
+	guitool = vimdiff
+[merge]
+	tool = vimdiff
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
+[push]
+	default = simple
+[user]
+	name = Fabien HIEGEL
+	email = fabien.hiegel@vidal.fr
+[alias]
+	########################################
+	# Shortcuts for common actions
+	########################################
+	a = add
+	aa = add --all
+	ap = add --patch
+	b = branch
+	co = checkout
+	cf = checkout -f
+	cb = checkout -b
+	#ci = commit
+	#cim = commit -m
+	com = commit
+	#cp = cherry-pick
+	cl = clone
+	p = pull
+	r = rebase
+	s = status
+	st = status -sbu
+	sl = status -bu
+	########################################
+	# Some functions
+	########################################
+	alias = config --get-regexp alias
+	master = "!git add --all; git stash save; git checkout -f master; git pull origin master --no-commit"
+	last = log -1 --stat
+	unstage = reset HEAD --
+	dc = diff --cached
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+	hide = update-index --assume-unchanged
+	unhide = update-index --no-assume-unchanged
+	hidden = "!git ls-files -v | grep ^h | cut -c 3-"
+	########################################
+	# PUSH
+	########################################
+	push-please         = "!git push --force-with-lease"
+	push-first          = "!git push -u origin `git rev-parse --abbrev-ref HEAD`"
+	push-feature        = "!git push -u origin HEAD:feature/`git rev-parse --abbrev-ref HEAD`"
+	push-feature-please = "!git push -u origin HEAD:feature/`git rev-parse --abbrev-ref HEAD` --force-with-lease"
+	push-bugfix         = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD`"
+	push-bugfix-please  = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD` --force-with-lease"

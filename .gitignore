@@ -1,0 +1,14 @@
+# Tout ignorer de base
+*
+
+# Déclaration explicite de ce que je souhaite partager
+!.gitconfig
+!.gitignore
+!.gitsettings
+!.gitsettings/**/*
+!.mine
+!.mine/**/*
+!.vimrc
+!.vim
+!.vim/config/
+#!.vim/**/*
