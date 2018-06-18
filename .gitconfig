@@ -71,3 +71,6 @@
 	push-feature-please = "!git push -u origin HEAD:feature/`git rev-parse --abbrev-ref HEAD` --force-with-lease"
 	push-bugfix         = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD`"
 	push-bugfix-please  = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD` --force-with-lease"
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always

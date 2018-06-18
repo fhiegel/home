@@ -39,3 +39,7 @@ export PATH=$HOME/tools/apache-maven/bin:$PATH
 
 alias fox-mine='firefox -P fhiegel-mine'
 alias fox-search='firefox -foreground -search'
+
+
+alias gnopen='gnome-open'
+alias jacoco='mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install org.jacoco:jacoco-maven-plugin:report'
