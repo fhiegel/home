@@ -114,7 +114,9 @@ packadd matchit
 
 
 " Add Pathogen
-execute pathogen#infect()
+if exists("pathogen")
+    execute pathogen#infect()
+endif
 
 " Install EdiorConfig
 " cd autoload/ && git clone https://github.com/editorconfig/editorconfig-vim.git
