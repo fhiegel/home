@@ -1,0 +1,8 @@
+echo "# INSTALL \"Mine\""
+cat <EOL
+# include .mine/.profile
+if [ -f "$HOME/.mine/.profile" ]; then
+    . "$HOME/.mine/.profile"
+fi
+EOL
+
