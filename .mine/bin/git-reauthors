@@ -1,7 +1,16 @@
-git filter-branch -f --env-filter '
-OLD_EMAIL="fabien.hiegel@vidal.fr"
+# OLD_EMAIL="fabien.hiegel@vidal.fr"
+OLD_EMAIL="fabien.hiegel@gmail.com"
 CORRECT_NAME="Fabien HIEGEL"
-CORRECT_EMAIL="fabien.hiegel@gmail.com"
+# CORRECT_EMAIL="fabien.hiegel@gmail.com"
+CORRECT_EMAIL="fabien.hiegel@vidal.fr"
+
+#DEFAULT_NAME="$(git config user.name)"
+#DEFAULT_EMAIL="$(git config user.email)"
+#export OLD_NAME="${1:-$DEFAULT_NAME}"
+#export NEW_NAME="${2:-$DEFAULT_NAME}"
+#export NEW_EMAIL="${3:-$DEFAULT_EMAIL}"
+
+git filter-branch -f --env-filter '
 if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
 then
     export GIT_COMMITTER_NAME="$CORRECT_NAME"
