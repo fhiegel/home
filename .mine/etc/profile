@@ -22,7 +22,7 @@ export PATH="${DEV_HOME}/tools/bin/:$PATH"
 # Colors
 #
 export COLORS=${MINE_HOME}/.mine/.color-import
-source $COLORS
+source ${MINE_HOME}/.mine/etc/colors
 
 #
 # Bannière de démarrage
