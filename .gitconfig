@@ -2,7 +2,7 @@
 	trustctime = false
 	editor = vim
 #	editor = "/home/fhiegel/Téléchargements/GitExtensions/GitExtensions.exe" fileeditor
-	filemode = false
+	fileMode = false
 	autolf = true
 	excludesfile = ~/.gitsettings/excludes
 	hooksPath = ~/.gitsettings/hooks
