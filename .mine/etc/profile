@@ -1,12 +1,17 @@
 #
 # HOME CONFIGURATION
 #
-if [ -z "${MINE_HOME}" ] ; then
-    export MINE_HOME="$(readlink -f ~)"
+if [ -z "${HOME_DIR}" ] ; then
+    export HOME_DIR="$(readlink -f ~)"
 fi
 
-alias home="cd ${MINE_HOME}"
-export PATH="${MINE_HOME}/.mine/bin/:$PATH"
+alias home="cd ${HOME_DIR}"
+
+#
+# MINE HOME
+#
+export MINE_HOME="${HOME_DIR}/.mine"
+alias mine="cd ${MINE_HOME}"
 
 #
 # DEV HOME
@@ -16,27 +21,17 @@ if [ -z "${DEV_HOME}" ] ; then
 fi
 
 alias dev="cd ${DEV_HOME}"
+
+#
+# PATH
+#
+export PATH="${MINE_HOME}/bin/:$PATH"
 export PATH="${DEV_HOME}/tools/bin/:$PATH"
 
 #
 # Colors
 #
-export COLORS=${MINE_HOME}/.mine/.color-import
-source ${MINE_HOME}/.mine/etc/colors
-
-#
-# Bannière de démarrage
-#
-# smllant
-if [ -z "$mine_banner_loaded" ]; then
-  cat ${MINE_HOME}/.mine/banner
-  mine_banner_loaded=true
-fi
-
-#
-# CONFIGURATION DU PROMPT GIT
-#
-source "${MINE_HOME}/.gitsettings/layout"
+source ${MINE_HOME}/etc/colors
 
 #
 # Dev HOME && ALIAS
@@ -50,15 +45,14 @@ alias fox-mine='firefox -P fhiegel-mine'
 alias fox-search='firefox -foreground -search'
 
 #
-# OPEN
+# PROFILE.D
+#   Shell dependent settings
 #
-alias gnopen='gnome-open'
-
-export JACOCO_VERSION=0.8.2;
-
-jacoco() { 
-  __jacoco_generate_report $*
+profile_d ()
+{
+  local file=
+  for file in $(echo ${MINE_HOME}/etc/profile.d/*.$1); do
+    [ -e "${file}" ] && . "${file}"
+  done
 }
-__jacoco_generate_report() { 
-  mvn clean org.jacoco:jacoco-maven-plugin:${JACOCO_VERSION}:prepare-agent install org.jacoco:jacoco-maven-plugin:${JACOCO_VERSION}:report $*
-}
+profile_d sh
