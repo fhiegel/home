@@ -56,6 +56,10 @@
 	alias = config --get-regexp alias
 	master = "!git add --all; git stash save; git checkout -f master; git pull origin master --no-commit"
 	fixup = "!f(){ tofix=${1:-$(git log --pretty=\"%H|%s\" | grep -v \"|fixup\" | head -1 | cut -d '|' -f1)}; git commit -a --fixup=$tofix; }; f"
+	quick = "!f(){ \
+		branchname=${1:-$(git rev-parse --abbrev-ref HEAD)};\
+		git -c user.name=\"Quicker\" -c user.email='' commit -an -m \"Quick-commit on (${branchname})\"; };\
+		f"
 	last = log -1 --stat
 	unstage = reset HEAD --
 	dc = diff --cached

@@ -17,7 +17,7 @@ alias mine="cd ${MINE_HOME}"
 # DEV HOME
 #
 if [ -z "${DEV_HOME}" ] ; then
-  export DEV_HOME='/develop'
+  export DEV_HOME="${HOME_DIR}/develop"
 fi
 
 alias dev="cd ${DEV_HOME}"
@@ -34,15 +34,16 @@ export PATH="${DEV_HOME}/tools/bin/:$PATH"
 source ${MINE_HOME}/etc/colors
 
 #
-# Dev HOME && ALIAS
+# ALIAS
 #
 alias katas="cd ${DEV_HOME}/katas"
 
-#
-# Firefox
-#
+# FIREFOX
 alias fox-mine='firefox -P fhiegel-mine'
 alias fox-search='firefox -foreground -search'
+
+# OPERA
+# alias opera-mine=
 
 #
 # PROFILE.D
