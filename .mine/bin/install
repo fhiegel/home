@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+PROFILE="$HOME/.profile"
+cat <<'__EOF__' >>"$PROFILE"
+# Load mine settings
+export HOME_DIR='/c/Users/Fabien_Hiegel'
+export DEV_HOME='/d/develop/workspaces'
+source ${HOME_DIR}/.mine/etc/profile
+__EOF__
