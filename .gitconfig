@@ -60,6 +60,7 @@
 		branchname=${1:-$(git rev-parse --abbrev-ref HEAD)};\
 		git -c user.name=\"Quicker\" -c user.email='' commit -an -m \"Quick-commit on (${branchname})\"; };\
 		f"
+	save= "!git commit -an -m \"Work in Progress savagely saved.\""
 	last = log -1 --stat
 	unstage = reset HEAD --
 	dc = diff --cached

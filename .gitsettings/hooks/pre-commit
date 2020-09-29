@@ -18,7 +18,6 @@ done <<< $filesWithTodo`
 
 Résolvez, ou finissez ces TODOs avant de committer !
 EOF
-	exit 1;
 else 
 	echo -e "$GREEN"
 	echo "You are allowed to commit !";
