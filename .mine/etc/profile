@@ -19,14 +19,21 @@ alias mine="cd ${MINE_HOME}"
 if [ -z "${DEV_HOME}" ] ; then
   export DEV_HOME="${HOME_DIR}/develop"
 fi
-
 alias dev="cd ${DEV_HOME}"
+
+#
+# TOOLS HOME
+#
+if [ -z "${TOOLS}" ] ; then
+  export TOOLS="${DEV_HOME}/tools"
+fi
 
 #
 # PATH
 #
 export PATH="${MINE_HOME}/bin/:$PATH"
-export PATH="${DEV_HOME}/tools/bin/:$PATH"
+export PATH="${TOOLS}/bin/:$PATH"
+export PATH="${TOOLS}/homebrew/bin:/${TOOLS}/.tfenv/bin:$PATH"
 
 #
 # Colors

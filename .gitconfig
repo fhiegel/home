@@ -6,7 +6,7 @@
 	autolf = true
 	excludesfile = ~/.gitsettings/excludes
 	hooksPath = ~/.gitsettings/hooks
-	autocrlf = input
+	autocrlf = false
 [color]
 	ui = true
 	branch = auto
@@ -55,12 +55,14 @@
 	########################################
 	alias = config --get-regexp alias
 	master = "!git add --all; git stash save; git checkout -f master; git pull origin master --no-commit"
+	amend = "!git commit --amend --no-edit"
+	pull-safe = "!git add --all && git stash save && git pull --no-commit && git stash pop"
 	fixup = "!f(){ tofix=${1:-$(git log --pretty=\"%H|%s\" | grep -v \"|fixup\" | head -1 | cut -d '|' -f1)}; git commit -a --fixup=$tofix; }; f"
 	quick = "!f(){ \
 		branchname=${1:-$(git rev-parse --abbrev-ref HEAD)};\
 		git -c user.name=\"Quicker\" -c user.email='' commit -an -m \"Quick-commit on (${branchname})\"; };\
 		f"
-	save= "!git commit -an -m \"Work in Progress savagely saved.\""
+	save= "!git commit -an -m \"wip: Work in Progress savagely saved.\""
 	last = log -1 --stat
 	unstage = reset HEAD --
 	dc = diff --cached
@@ -68,6 +70,8 @@
 	hide = update-index --assume-unchanged
 	unhide = update-index --no-assume-unchanged
 	hidden = "!git ls-files -v | grep ^h | cut -c 3-"
+	user-evtech = "config --add user.email fhiegel@oui.sncf"
+	user-mine = "config --add user.email fabien.hiegel@gmail.com"
 	########################################
 	# PUSH
 	########################################
