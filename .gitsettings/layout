@@ -1,7 +1,0 @@
-# CONFIGURATION DU PROMPT GIT
-#
-# Import this fileInto your equivalent ".profile" file like :
-#     source ~/.gitsettings/layout
-#     . ~/.gitsettings/layout
-# 
-export PS1="\n$GREEN\u@\h $BROWN\w$RED"'`__git_ps1`'"$NC\n$ "
