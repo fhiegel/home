@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+cmdname=$(basename $0)
+
+die() {  echo -e "${RED}\n$@${NC}" >&2;  exit 1; }
+cmdexist() { [[ -x "$(command -v $1)" ]]; }
+require() { ! cmdexist $1 && usage && die "Error: \"$1\" is not installed.\n"; }
+
+usage() {
+  cat <<USAGE >&2
+Usage:
+    $cmdname [...options] <email-to-replace>
+
+    -h | --help       display this message
+         --dry-run    display env-filter command which will be print (and do not run it)
+USAGE
+}
+
+require git
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -h | --help)
+    usage && exit 0
+    ;;
+  --dry-run)
+    RUN_DRY=1
+    shift
+    ;;
+  -n | --name)
+    CORRECT_NAME="$2"
+    shift # past argument
+    shift # past value
+    ;;
+  -e | --email)
+    CORRECT_EMAIL="$2"
+    shift # past argument
+    shift # past value
+    ;;
+  --rev-list)
+    REV_LIST="$2"
+    shift # past argument
+    shift # past value
+    ;;
+  *) # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift              # past argument
+    ;;
+  esac
+done
+
+OLD_EMAIL="${POSITIONAL[0]}"
+[[ -z "$OLD_EMAIL" ]] && usage && die "Email is required"
+
+if [[ -z "$CORRECT_EMAIL" ]]; then
+  CORRECT_EMAIL=$(git config user.email)
+fi
+if [[ -z "$CORRECT_NAME" ]]; then
+  CORRECT_NAME=$(git config user.name)
+fi
+# @see https://git-scm.com/docs/git-rev-list
+if [[ -z "REV_LIST" ]]; then
+  REV_LIST="--branches --tags"
+fi
+
+read -d '' env_filter_cmd <<__EOF__
+if [[ "\$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]]
+then
+  echo  "COMITTER"
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [[ "\$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]]
+then
+echo  "AUTHOR"
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+__EOF__
+
+if [[ $RUN_DRY -gt 0 ]]; then
+  set -x
+  git filter-branch --dry-run -f --env-filter "$env_filter_cmd" --tag-name-filter cat -- ${REV_LIST[@]}
+  set +x
+  exit 0
+fi
+git filter-branch -f --env-filter "$env_filter_cmd" --tag-name-filter cat -- ${REV_LIST[@]}

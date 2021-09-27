@@ -1,0 +1,83 @@
+#
+# HOME CONFIGURATION
+#
+if [ -z "${HOME_DIR}" ] ; then
+    export HOME_DIR="$(readlink -f ~)"
+fi
+
+alias home="cd ${HOME_DIR}"
+
+#
+# MINE HOME
+#
+export MINE_HOME="${HOME_DIR}/.mine"
+alias mine="cd ${MINE_HOME}"
+
+#
+# DEV HOME
+#
+if [ -z "${DEV_HOME}" ] ; then
+  export DEV_HOME="${HOME_DIR}/develop"
+  mkdir -p "${DEV_HOME}"
+fi
+
+if [ -z "${DEV_WORKSPACES}" ] ; then
+  export DEV_WORKSPACE="${DEV_HOME}/workspaces"
+  mkdir -p "${DEV_WORKSPACE}"
+fi
+
+if [ -z "${DEV_MINE}" ] ; then
+  export DEV_MINE="${DEV_HOME}/mine"
+  mkdir -p "${DEV_MINE}"
+fi
+
+alias dev="cd ${DEV_HOME}"
+alias dev-mine="cd ${DEV_MINE}"
+alias dev-work="cd ${DEV_WORKSPACE}"
+
+#
+# TOOLS HOME
+#
+if [ -z "${TOOLS}" ] ; then
+  export TOOLS="${DEV_HOME}/tools"
+  mkdir -p "${TOOLS}"
+fi
+alias dev-tools="cd ${DEV_WORKSPACE}"
+
+
+#
+# PATH
+#
+export PATH="${MINE_HOME}/bin/:$PATH"
+export PATH="${TOOLS}/bin/:$PATH"
+export PATH="${TOOLS}/homebrew/bin:/${TOOLS}/.tfenv/bin:$PATH"
+
+#
+# Colors
+#
+source ${MINE_HOME}/etc/colors
+
+#
+# ALIAS
+#
+alias katas="cd ${DEV_HOME}/katas"
+
+# FIREFOX
+alias fox-mine='firefox -P fhiegel-mine'
+alias fox-search='firefox -foreground -search'
+
+# OPERA
+# alias opera-mine=
+
+#
+# PROFILE.D
+#   Shell dependent settings
+#
+profile_d ()
+{
+  local file=
+  for file in $(echo ${MINE_HOME}/etc/profile.d/*.$1); do
+    [ -e "${file}" ] && . "${file}"
+  done
+}
+profile_d sh

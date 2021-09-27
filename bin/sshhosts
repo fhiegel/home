@@ -1,0 +1,13 @@
+#
+# SSH
+#
+alias sshhosts="grep -w -i "Host" ~/.ssh/config | sed 's/Host//'"
+
+restart_ssh() {
+  for possiblekey in ${HOME}/.ssh/id_*; do
+    if grep -q PRIVATE "$possiblekey"; then
+      ssh-add "$possiblekey";
+    fi;
+  done
+}
+
