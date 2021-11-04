@@ -7,3 +7,8 @@
 
 # Exclut l'ensemble des Bannières
 banner
+
+.idea
+*.iml
+
+target

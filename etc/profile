@@ -11,6 +11,7 @@ alias home="cd ${HOME_DIR}"
 # MINE HOME
 #
 export MINE_HOME="${HOME_DIR}/.mine"
+export MINE_DIR="${HOME_DIR}/.mine"
 alias mine="cd ${MINE_HOME}"
 
 #
@@ -68,6 +69,18 @@ alias fox-search='firefox -foreground -search'
 
 # OPERA
 # alias opera-mine=
+
+ssh-connect() {
+	eval $(ssh-agent -s) && ssh-add ~/.ssh/* 
+}
+
+#
+# SECRETS
+#
+SECRETS="${MINE_HOME}/etc/secrets"
+if [ -f "$SECRETS" ]; then
+    source $SECRETS
+fi
 
 #
 # PROFILE.D

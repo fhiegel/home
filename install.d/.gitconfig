@@ -1,10 +1,10 @@
 [core]
-	trustctime = false
+	grustctime = false
 	editor = vim
 #	editor = "/home/fhiegel/Téléchargements/GitExtensions/GitExtensions.exe" fileeditor
 	fileMode = false
 	autolf = true
-	excludesfile = ~/.gitsettings/excludes
+	excludesfile = ~/.mine/etc/git/excludes
 	hooksPath = ~/.gitsettings/hooks
 	autocrlf = false
 [color]
@@ -28,7 +28,8 @@
 	default = simple
 [user]
 	name = Fabien HIEGEL
-	email = fabien.hiegel@gmail.com
+[includeIf "gitdir:**\.?mine/*"]
+	path = "${MINE_DIR}/etc/git/.gitconfig"
 [alias]
 	########################################
 	# Shortcuts for common actions
