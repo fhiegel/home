@@ -12,3 +12,5 @@ banner
 *.iml
 
 target
+
+*secrets.*

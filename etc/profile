@@ -62,6 +62,9 @@ source ${MINE_HOME}/etc/colors
 # ALIAS
 #
 alias katas="cd ${DEV_HOME}/katas"
+# alias ..="cd .."
+# alias ...="cd ../.."
+# alias ....="cd ../../.."
 
 # FIREFOX
 alias fox-mine='firefox -P fhiegel-mine'
