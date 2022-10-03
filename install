@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+
+install()
+{
+
+	echo "Installing ..."
+	INSTALL_DIR="$HOME/.mine/install.d"
+
+	echo $INSTALL_DIR
+
+	PROFILE="$HOME/.profile"
+	cat <<'__EOF__' >>"$PROFILE"
+	# Load mine settings
+	source ${HOME_DIR}/.mine/etc/profile
+
+	export INSTALLED=true
+
+__EOF__
+
+	# GIT
+	cp "${INSTALL_DIR}/.gitconfig" "${HOME}/"
+}
+
+
+if [[ -z "$INSTALLED" && {INSTALLED} ]]; then
+  echo "installing"
+  install
+  source $PROFILE
+  check_tools
+fi
