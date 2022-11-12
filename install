@@ -4,24 +4,6 @@
 install()
 {
 
-<<<<<<< Updated upstream
-	echo "Installing ..."
-	INSTALL_DIR="$HOME/.mine/install.d"
-
-	echo $INSTALL_DIR
-
-	PROFILE="$HOME/.profile"
-	cat <<'__EOF__' >>"$PROFILE"
-	# Load mine settings
-	source ${HOME_DIR}/.mine/etc/profile
-
-	export INSTALLED=true
-
-__EOF__
-
-	# GIT
-	cp "${INSTALL_DIR}/.gitconfig" "${HOME}/"
-=======
 echo "Installing ..."
 INSTALL_DIR="$HOME/.mine/install.d"
 
@@ -41,7 +23,6 @@ cp "${INSTALL_DIR}/.gitconfig" "${HOME}/"
 
 # BIN
 find ./bin -type f -exec chmod +x {} \;	
->>>>>>> Stashed changes
 }
 
 
