@@ -32,12 +32,12 @@
 	default = simple
 [user]
 	name = Fabien HIEGEL
-	email = fhiegel@maisonsdumonde.com
+	email = fabien.hiegel@gmail.com
 [branch]
 	autosetupmerge = always
 	autosetuprebase = always
 [includeIf "gitdir:**\.?mine/*"]
-	path = "${MINE_DIR}/etc/git/.gitconfig"
+	path = "${MINE_DIR}/etc/git/.gitconfig-mine"
 [includeIf "gitdir:/mnt/c/**/*"]
 	path = "${MINE_DIR}/etc/git/.gitconfig-windows"
 

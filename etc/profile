@@ -1,10 +1,11 @@
+#!/usr/bin/env bash
+
 #
 # HOME CONFIGURATION
 #
 if [ -z "${HOME_DIR}" ] ; then
     export HOME_DIR="$(readlink -f ~)"
 fi
-
 alias home="cd ${HOME_DIR}"
 
 #
@@ -13,87 +14,51 @@ alias home="cd ${HOME_DIR}"
 export MINE_HOME="${HOME_DIR}/.mine"
 export MINE_DIR="${HOME_DIR}/.mine"
 alias mine="cd ${MINE_HOME}"
+export PATH="${MINE_HOME}/bin/:$PATH"
 
 #
-# DEV HOME
+# DEV folders
 #
-if [ -z "${DEV_HOME}" ] ; then
-  export DEV_HOME="${HOME_DIR}/develop"
-  mkdir -p "${DEV_HOME}"
-fi
+export DEV_HOME="${HOME_DIR}/develop"
+export DEV_WORKSPACE="${DEV_HOME}/workspaces"
+export DEV_TOOLS="${DEV_HOME}/tools"
+export DEV_MINE="${DEV_HOME}/mine"
 
-if [ -z "${DEV_WORKSPACES}" ] ; then
-  export DEV_WORKSPACE="${DEV_HOME}/workspaces"
-  mkdir -p "${DEV_WORKSPACE}"
-fi
-
-if [ -z "${DEV_MINE}" ] ; then
-  export DEV_MINE="${DEV_HOME}/mine"
-  mkdir -p "${DEV_MINE}"
-fi
+[[ -d "${DEV_HOME}" ]] || mkdir -p "${DEV_HOME}"
+[[ -d "${DEV_WORKSPACE}" ]] || mkdir -p "${DEV_WORKSPACE}"
+[[ -d "${DEV_TOOLS}" ]] || mkdir -p "${DEV_TOOLS}"
+[[ -d "${DEV_MINE}" ]] || mkdir -p "${DEV_MINE}"
 
 alias dev="cd ${DEV_HOME}"
-alias dev-mine="cd ${DEV_MINE}"
 alias dev-work="cd ${DEV_WORKSPACE}"
+alias dev-tools="cd ${DEV_TOOLS}"
+alias dev-mine="cd ${DEV_MINE}"
 
-#
-# TOOLS HOME
-#
-if [ -z "${TOOLS}" ] ; then
-  export TOOLS="${DEV_HOME}/tools"
-  mkdir -p "${TOOLS}"
-fi
-alias dev-tools="cd ${DEV_WORKSPACE}"
-
-
-#
-# PATH
-#
-export PATH="${MINE_HOME}/bin/:$PATH"
 export PATH="${TOOLS}/bin/:$PATH"
-export PATH="${TOOLS}/homebrew/bin:/${TOOLS}/.tfenv/bin:$PATH"
-
-#
-# Colors
-#
-source ${MINE_HOME}/etc/colors
-
-#
-# ALIAS
-#
-alias katas="cd ${DEV_HOME}/katas"
-# alias ..="cd .."
-# alias ...="cd ../.."
-# alias ....="cd ../../.."
-
-# FIREFOX
-alias fox-mine='firefox -P fhiegel-mine'
-alias fox-search='firefox -foreground -search'
-
-# OPERA
-# alias opera-mine=
-
-ssh-connect() {
-	eval $(ssh-agent -s) && ssh-add ~/.ssh/* 
-}
 
 #
 # SECRETS
 #
-SECRETS="${MINE_HOME}/etc/secrets"
-if [ -f "$SECRETS" ]; then
-    source $SECRETS
-fi
+load_secrets ()
+{
+  export MINE_SECRETS="${MINE_HOME}/etc/secrets"
+  [[ -d "${MINE_SECRETS}" ]] || mkdir -p "${MINE_SECRETS}"
+  for file in $(echo ${MINE_SECRETS}/*.env); do
+    [[ -e "${file}" ]] && . "${file}"
+  done
+}
+load_secrets
 
 #
-# PROFILE.D
+# Auto load 'autoload.d' content
+# autoload.d
 #   Shell dependent settings
 #
-profile_d ()
+autoload_d ()
 {
   local file=
-  for file in $(echo ${MINE_HOME}/etc/profile.d/*.$1); do
+  for file in $(echo ${MINE_HOME}/etc/autoload.d/*); do
     [ -e "${file}" ] && . "${file}"
   done
 }
-profile_d sh
+autoload_d

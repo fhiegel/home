@@ -24,13 +24,10 @@ PROFILE="$HOME/.profile"
 cat <<'__EOF__' >>"$PROFILE"
 # Load mine settings
 source ${HOME}/.mine/etc/profile
-
-export INSTALLED=true
-
 __EOF__
 
 # GIT
-cp "${INSTALL_DIR}/.gitconfig" "${HOME}/"
+(cd "${HOME}" && cp .mine/etc/git/.gitconfig.template .gitconfig)
 
 # BIN
 find ./bin -type f -exec chmod +x {} \;	

@@ -2,7 +2,7 @@
 
 cmdname=$(basename $0)
 
-die() {  echo -e "${RED}\n$@${NC}" >&2;  exit 1; }
+die() {  echo -e "${RED}\n$*${NC}" >&2;  exit 1; }
 cmdexist() { [[ -x "$(command -v $1)" ]]; }
 require() { ! cmdexist $1 && usage && die "Error: \"$1\" is not installed.\n"; }
 

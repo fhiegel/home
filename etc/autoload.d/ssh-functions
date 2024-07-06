@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+alias ssh-hosts="grep -w -i \"Host\" ~/.ssh/config | sed 's/Host//'"
+
+ssh-connect() {
+	eval "$(ssh-agent -s)" && find  ~/.ssh -name "id_*" ! -name "*.pub" -exec ssh-add {} \;
+}

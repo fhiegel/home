@@ -26,3 +26,32 @@
 # - Mode normal : executer l'isntall si n'existe pas
 # - Mode dry-run : print du script
 # - Mode reinstall : exécuter l'install même si l'outil est déjà installé
+
+# INSTALL de poste from scratch : 
+ 1  pwd
+    2  ll
+    3  mkdir .ssh
+    4  cd .ssh/
+    5  ssh-keygen -t ed25519 -C "fabien.hiegel@gmail.com"
+    6  cat id_gh_win.pub
+    7  eval $(ssh-agent -s) && find  ~/.ssh -name "id_*" -exec ssh-add {} \;
+    8  cd
+    9  git clone git@github.com:fhiegel/home.git .mine
+   10  ll
+   11  history
+   12  mkdir -p .data/obsidian
+   13  mkdir --help
+   14  mkdir -p develop/workspaces/mine
+   15  mkdir -p develop/workspaces/shodo develop/tools
+   16  ll develop/
+   17  cd .mine/
+   18  cd
+   19  cd .data/obsidian/
+   20  git clone git@github.com:fhiegel/home.git .mine
+   21  rm -rf .mine
+   22  git clone git@github.com:de-dale/spherier-obsidian.git
+   23  cd -
+   24  (cd ~/.data/obsidian/ && git pull)
+   # TODO : script git-obsidian
+   25  (cd ~/.data/obsidian/spherier-obsidian/ && git pull)
+   26  history
