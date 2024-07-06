@@ -1,21 +1,28 @@
 [core]
 	trustctime = false
 	editor = vim
-	fileMode = false
+	pager = delta
+	filemode = true
 	autolf = true
-	excludesfile = ~/.mine/etc/git/excludes
+	excludesfile = "${MINE_DIR}/etc/git/excludes"
 	hooksPath = ~/.gitsettings/hooks
-	autocrlf = true
+	autocrlf = input
 [color]
 	ui = true
 	branch = auto
 	diff = auto
 	interactive = auto
 	status = auto
+[delta]
+	navigate = true
 [diff]
 	guitool = vimdiff
+	colorMoved = default
+[interactive]
+	diffFilter = delta --color-only
 [merge]
 	tool = vimdiff
+	conflictstyle = diff3
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false
@@ -26,24 +33,29 @@
 [user]
 	name = Fabien HIEGEL
 	email = fhiegel@maisonsdumonde.com
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always
 [includeIf "gitdir:**\.?mine/*"]
-  path = "${MINE_DIR}/etc/git/.gitconfig"
+	path = "${MINE_DIR}/etc/git/.gitconfig"
+[includeIf "gitdir:/mnt/c/**/*"]
+	path = "${MINE_DIR}/etc/git/.gitconfig-windows"
 
 [alias]
 	a = add
 	aa = add --all
 	ap = add --patch
 	b = branch
-	co = checkout
+	#co = checkout
 	cf = checkout -f
 	cb = checkout -b
 	#ci = commit
 	#cim = commit -m
 	com = commit
 	#cp = cherry-pick
-	cl = clone
-	p = pull
-	r = rebase
+	#cl = clone
+	#p = pull
+	#r = rebase
 	s = status
 	st = status -sbu
 	sl = status -bu
@@ -61,14 +73,8 @@
 	hide = update-index --assume-unchanged
 	unhide = update-index --no-assume-unchanged
 	hidden = "!git ls-files -v | grep ^h | cut -c 3-"
-	user-evtech = "config --add user.email fhiegel@oui.sncf"
 	user-mine = "config --add user.email fabien.hiegel@gmail.com"
 	push-please         = "!git push --force-with-lease"
 	push-first          = "!git push -u origin `git rev-parse --abbrev-ref HEAD`"
-	push-feature        = "!git push -u origin HEAD:feature/`git rev-parse --abbrev-ref HEAD`"
-	push-feature-please = "!git push -u origin HEAD:feature/`git rev-parse --abbrev-ref HEAD` --force-with-lease"
-	push-bugfix         = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD`"
-	push-bugfix-please  = "!git push -u origin HEAD:bugfix/`git rev-parse --abbrev-ref HEAD` --force-with-lease"
-[branch]
-	autosetupmerge = always
-	autosetuprebase = always
+	delete-merged-remote= "!git remote prune origin && git branch -r --merged origin/master | grep -v master | grep \"origin/\" | cut -d \"/\" -f 2- | xargs -n 20 git push --delete origin"
+

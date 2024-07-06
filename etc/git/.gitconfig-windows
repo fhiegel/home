@@ -1,0 +1,5 @@
+[core]
+        filemode = false
+        autocrlf = input
+[meta]
+	name = windows-config

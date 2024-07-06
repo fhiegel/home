@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# TODO : mine
+# Créer un script qui me permet de jouer des soucsi-scripts spécifiques à mes besoins
+# Deux fonction principales 
+# - mine install/tool-checking : pour installer les principaux outils
+# - mine list : pour avoir la liste des scripts custom disponibles
+
+# Voir ces ressources en inspiration d'un script avec des sub commands
+# https://stackoverflow.com/questions/37257551/defining-subcommands-that-take-arguments-in-bash
+# https://gist.github.com/waylan/4080362
+
+# listes des scripts / idées
+# - mine alias : permet de maintenir une liste d'alias
+# - mine ssh-connect : aujourd'hui ma fonction custom la plus utile
+# - mine secrets : permet de maintenir des secrests, non visibles sous git
+# - mine env : permet de maintenir les variables d'environement, aujourd'hui dans 'profile'
+
+# TODO: install
+# Checker les différents outils
+# - Déplacer le script checktools dans le dir d'install
+# - décoreller le script de la "liste d'outils"
+# - révoir une "checktool" par défaut et la possibilité de faire un "checktool" spécifique (ex: pour git vérifier qu'on a tig et/ou d'autres outils)
+
+# Pour chaque outil, prévoir un script d'install avec les modes suivants
+# - Mode normal : executer l'isntall si n'existe pas
+# - Mode dry-run : print du script
+# - Mode reinstall : exécuter l'install même si l'outil est déjà installé

@@ -25,3 +25,6 @@ tools+=(jq)
 tools+=(yq)
 tools+=(fzf)
 tools+=(bat)
+tools+=kubectl
+tools+=k9s
+tools+=brew

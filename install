@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
 
+# TODO
+# Checker les différents outils
+# - Déplacer le script checktools dans le dir d'install
+# - décoreller le script de la "liste d'outils"
+# - révoir une "checktool" par défaut et la possibilité de faire un "checktool" spécifique (ex: pour git vérifier qu'on a tig et/ou d'autres outils)
+
+# Pour chaque outil, prévoir un script d'install avec les modes suivants
+# - Mode normal : executer l'isntall si n'existe pas
+# - Mode dry-run : print du script
+# - Mode reinstall : exécuter l'install même si l'outil est déjà installé
+
 install()
 {
 

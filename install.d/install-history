@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# BREW
+
+# GIT
+apt install git
+apt install tig
+brew install git-delta
+
+# SDKMAN
+
+apt-get install unzip
+apt-get install zip
+curl -s "https://get.sdkman.io" | bash
+
+sdk install maven 3.9.6
+sdk install java 17.0.10-tem
+sdk install java 11.0.22-tem
+
+# Kubernetes: kubectl, k9s
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Réglage de l'heure si besoin pour les paquets
+sudo hwclock --hctosys
+sudo timedatectl set-ntp on
+
+# Google cloud pour gke
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+
+apt-get update 
+apt-get install google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
+# gcloud components update
+gcloud auth login
+
+# k9s
+brew install k9s
+
+# jq
+apt-get install jq
+
+# yq
+add-apt-repository ppa:rmescandon/yq
+apt update
+apt install yq -y
+
+# bat
+apt-get install bat
+
+# fzf
+brew install fzf
+
+# java keytools
+
+# get_certificate_in_it_file : ma propre fonction
+# get_certificate_in_its_file git.maisonsdumonde.net
+# get_certificate_in_its_file artifactory01.siege.xm 
+
+keytool -import -file ./git.maisonsdumonde.net.crt -keystore ../.sdkman/candidates/java/17.0.10-tem/lib/security/cacerts -storepass changeit -alias gitlab-mdm
+keytool -import -file ./artifactory01.siege.xm.crt -keystore ../.sdkman/candidates/java/17.0.10-tem/lib/security/cacerts -storepass changeit -alias artifactory-mdm
+
+# nvm & nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install node 21
+

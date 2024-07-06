@@ -12,3 +12,4 @@ alias java13='sdk use java 13.0.2-zulu'
 #
 alias gnopen='gnome-open'
 alias open='explorer'
+alias o6n='cd /mnt/c/Users/hiegel-f/spherier-obsidian'
