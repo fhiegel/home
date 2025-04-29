@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+
+obsidian-init()
+{
 if [ -z "${OBSIDIAN_HOME}" ] ; then
     echo "Obsidian : Saisir le répertoire du vault:"
     read -e OBSIDIAN_HOME
@@ -10,16 +13,21 @@ if [ -z "${OBSIDIAN_WORKSPACE}" ] ; then
     echo "OBSIDIAN_WORKSPACE=${OBSIDIAN_WORKSPACE}" >> "${MINE_SECRETS}/obsidian.env"
 fi
 
-alias o6n="cd ${OBSIDIAN_HOME}"
+alias obsidian="cd ${OBSIDIAN_HOME}"
+alias o6n=obsidian
+}
 
-o6n-pull()
+
+obsidian-pull()
 {
   (cd "${OBSIDIAN_HOME}" && git aa && git stash save --quiet && git pull && git stash pop)
 }
+alias o6n-pull=obsidian-pull
 
-o6n-save()
+obsidian-save()
 {
   NOW=$(date +"%Y-%m-%d")
   MESSAGE="${NOW}: Backup from ${OBSIDIAN_WORKSPACE}"
   (cd "${OBSIDIAN_HOME}" && ssh-connect && git aa && git com -m "${MESSAGE}" && git push)
 }
+alias o6n-save=obsidian-save

@@ -8,6 +8,12 @@ if [ -z "${HOME_DIR}" ] ; then
 fi
 alias home="cd ${HOME_DIR}"
 
+# IF WSL, configure windows home directory
+if [ -n "${WSL_DISTRO_NAME}" ] ; then
+    export WIN_HOME_DIR=$(wslpath "$(wslvar USERPROFILE)")
+    alias win-home="cd ${WIN_HOME_DIR}"
+fi
+
 #
 # MINE HOME
 #
